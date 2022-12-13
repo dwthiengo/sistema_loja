@@ -666,7 +666,7 @@ public class FrmVenda extends javax.swing.JFrame {
 
     private void btnbuscaclienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnbuscaclienteActionPerformed
 
-        Cliente obj = new Cliente();
+
         DaoCliente dao = new DaoCliente();
 
         obj = dao.buscaporcpf(txtcpf.getText());
