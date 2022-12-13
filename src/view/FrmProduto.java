@@ -48,7 +48,8 @@ public class FrmProduto extends javax.swing.JFrame {
                 c.getDescricao(),
                 c.getPreco(),
                 c.getQtd_estoque(),
-                c.getFornecedor().getNome()
+                c.getFornecedor().getNome(),
+                c.getCategoria().getDescricao()
 
             });
 
@@ -320,7 +321,7 @@ public class FrmProduto extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Código", "Descrição", "Preço", "Qtd. Estoque", "Fornecedor"
+                "Código", "Descrição", "Preço", "Qtd. Estoque", "Fornecedor", "Categoria"
             }
         ));
         tabelaProdutos.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -470,15 +471,20 @@ public class FrmProduto extends javax.swing.JFrame {
             txtdescricao.setText(obj.getDescricao());
             txtpreco.setText(String.valueOf(obj.getPreco()));
             txtqtdestoque.setText(String.valueOf(obj.getQtd_estoque()));
+            
          
             Fornecedor f = new Fornecedor();
             DaoFornecedor fdao = new DaoFornecedor();
             
-
             f = fdao.consultaPorNome(obj.getFornecedor().getNome());
            
-
             cbfornecedor.getModel().setSelectedItem(f);
+            
+            Categoria c = new Categoria();
+            DaoCategoria cdao = new DaoCategoria();
+            c = cdao.consultaPorNome(obj.getCategoria().getDescricao());
+            cbcategoria.getModel().setSelectedItem(c);
+            
             
         } else {
             JOptionPane.showMessageDialog(null, "Produto não encontrado!");
@@ -502,7 +508,8 @@ public class FrmProduto extends javax.swing.JFrame {
                 c.getDescricao(),
                 c.getPreco(),
                 c.getQtd_estoque(),
-                c.getFornecedor().getNome()
+                c.getFornecedor().getNome(),
+                c.getCategoria().getDescricao()
             });
 
         }
@@ -529,21 +536,12 @@ public class FrmProduto extends javax.swing.JFrame {
         //Criar um objeto de Categoria
         Categoria c = new Categoria();
         c = (Categoria) cbcategoria.getSelectedItem();
-        obj.setFornecedor(f);
+        obj.setCategoria(c);
 
         DaoProduto dao = new DaoProduto();
         dao.cadastrar(obj);
         
         
-        Produto produto = new Produto();
-        produto.setDescricao(txtdescricao.getText());
-        produto.setPreco(Double.parseDouble(txtpreco.getText()));
-        
-        Categoria categoria = (Categoria)cbcategoria.getSelectedItem();
-        System.out.println(categoria);
-        produto.setCategoria(categoria);
-        
-        dao.inserir(produto);
         JOptionPane.showMessageDialog(null, "Produto cadastrado com sucesso");
         
         txtdescricao.setText("");

@@ -34,7 +34,7 @@ public class DaoProduto {
 
             stmt.setInt(4, obj.getFornecedor().getId());
             
-            stmt.setInt(5, obj.getCategoria().getCodigo());
+            stmt.setInt(5, obj.getCategoria().getId());
 
             stmt.execute();
             stmt.close();
@@ -50,16 +50,16 @@ public class DaoProduto {
     }
     
      public void inserir(Produto produto){
-        String sql= "insert into produto(id, descricao, preco, qtd_estoque, fornecedor, categoria) value (?,?,?,?,?,?,?)";
+        String sql= "insert into produto(descricao, preco, qtd_estoque, fornecedor, categoria) value (?,?,?,?,?,?)";
         
         try {
             PreparedStatement stmt = con.prepareStatement(sql);
-            stmt.setInt(1, produto.getId());
-            stmt.setString(2, produto.getDescricao());
-            stmt.setDouble(3, produto.getPreco());
-            stmt.setInt(4, produto.getQtd_estoque());
-            stmt.setString(5, produto.getFornecedor().getNome());
-            stmt.setInt(6, produto.getCategoria().getCodigo());
+            
+            stmt.setString(1, produto.getDescricao());
+            stmt.setDouble(2, produto.getPreco());
+            stmt.setInt(3, produto.getQtd_estoque());
+            stmt.setString(4, produto.getFornecedor().getNome());
+            stmt.setInt(5, produto.getCategoria().getId());
             
            stmt.executeUpdate();
             
@@ -129,9 +129,9 @@ public class DaoProduto {
             List<Produto> lista = new ArrayList<>();
 
             //2 passo - criar o sql , organizar e executar.
-            String sql = "select p.id, p.descricao, p.preco, p.qtd_estoque, f.nome from tb_produtos as p "
+            String sql = "select p.id, p.descricao, p.preco, p.qtd_estoque, f.nome, c.descricao  from tb_produtos as p "
                     + "inner join tb_fornecedores as f on (p.for_id = f.id)"
-                    + "inner join tb_categoria as c on (p.cat_id = c.codigo)";
+                    + "inner join tb_categoria as c on (p.cat_id = c.id)";
 
             PreparedStatement stmt = con.prepareStatement(sql);
             ResultSet rs = stmt.executeQuery();
@@ -172,9 +172,9 @@ public class DaoProduto {
             List<Produto> lista = new ArrayList<>();
 
             //2 passo - criar o sql , organizar e executar.
-            String sql = "select p.id, p.descricao, p.preco, p.qtd_estoque, f.nome from tb_produtos as p "
+            String sql = "select p.id, p.descricao, p.preco, p.qtd_estoque, f.nome, c.descricao  from tb_produtos as p "
                     + "inner join tb_fornecedores as f on (p.for_id = f.id) where p.descricao like ?"
-                    + "inner join tb_categoria as c on (p.cat_id = c.codigo)";
+                    + "inner join tb_categoria as c on (p.cat_id = c.id)";
 
             PreparedStatement stmt = con.prepareStatement(sql);
             stmt.setString(1, nome);
@@ -214,9 +214,9 @@ public class DaoProduto {
         try {
             //1 passo - criar o sql , organizar e executar.
 
-            String sql = "select p.id, p.descricao, p.preco, p.qtd_estoque, f.nome, c.codigo, c.descricao from tb_produtos as p "
+            String sql = "select p.id, p.descricao, p.preco, p.qtd_estoque, f.nome, c.descricao from tb_produtos as p "
                     + "inner join tb_fornecedores as f on (p.for_id = f.id)"
-                    + "inner join tb_categoria as c on (p.cat_id = c.codigo)"
+                    + "inner join tb_categoria as c on (p.cat_id = c.id)"
                     + " where p.descricao =  ?";
 
             PreparedStatement stmt = con.prepareStatement(sql);

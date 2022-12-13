@@ -10,11 +10,6 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import jdbc.ConnectionFactory;
 import model.Categoria;
-import model.Fornecedor;
-import model.Funcionario;
-import model.Produto;
-import view.FrmLogin;
-import view.FrmMenu;
 
 
 public class DaoCategoria {
@@ -38,7 +33,7 @@ public class DaoCategoria {
             
            while(rs.next()){
                 Categoria categoria = new Categoria();
-                categoria.setId(rs.getInt("codigo"));
+                categoria.setId(rs.getInt("id"));
                 categoria.setDescricao(rs.getString("descricao"));
                 
                 resultado.add(categoria);
@@ -80,7 +75,7 @@ public class DaoCategoria {
 
     }
 
-    //Metodo Alterar Funcionario
+    //Metodo Alterar Categoria
     public void alterarCategoria(Categoria obj) {
         try {
 
@@ -107,7 +102,7 @@ public class DaoCategoria {
         }
     }
 
-    //Metodo Excluir Funcionario
+    //Metodo Excluir Categoria
     public void excluirCategoria(Categoria obj) {
         try {
 
@@ -131,42 +126,25 @@ public class DaoCategoria {
 
     }
 
-    //Metodo Listar Todos Funcionarios
-    public List<Funcionario> listarCategorias() {
+    //Metodo Listar Todos Categorias
+    public List<Categoria> listarCategorias() {
         try {
 
             //1 passo criar a lista
-            List<Funcionario> lista = new ArrayList<>();
+            List<Categoria> lista = new ArrayList<>();
 
             //2 passo - criar o sql , organizar e executar.
-            String sql = "select * from tb_funcionarios";
+            String sql = "select * from tb_categoria";
             PreparedStatement stmt = con.prepareStatement(sql);
 
             ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {
-                Funcionario obj = new Funcionario();
+                Categoria obj = new Categoria();
 
                 obj.setId(rs.getInt("id"));
-                obj.setNome(rs.getString("nome"));
-                obj.setRg(rs.getString("rg"));
-                obj.setCpf(rs.getString("cpf"));
-                obj.setEmail(rs.getString("email"));
-
-                obj.setSenha(rs.getString("senha"));
-                obj.setCargo(rs.getString("cargo"));
-                obj.setNivel_acesso(rs.getString("nivel_acesso"));
-
-                obj.setTelefone(rs.getString("telefone"));
-                obj.setCelular(rs.getString("celular"));
-                obj.setCep(rs.getString("cep"));
-                obj.setEndereco(rs.getString("endereco"));
-                obj.setNumero(rs.getInt("numero"));
-                obj.setComplemento(rs.getString("complemento"));
-                obj.setBairro(rs.getString("bairro"));
-                obj.setCidade(rs.getString("cidade"));
-                obj.setUf(rs.getString("estado"));
-
+                obj.setDescricao(rs.getString("descricao"));
+                
                 lista.add(obj);
             }
 
@@ -193,7 +171,7 @@ public class DaoCategoria {
 
             if (rs.next()) {
 
-                obj.setCodigo(rs.getInt("id"));
+                obj.setId(rs.getInt("id"));
                 obj.setDescricao(rs.getString("descricao"));
                 
             }
@@ -206,42 +184,25 @@ public class DaoCategoria {
         }
     }
 
-    //Metodo listaFuncionarioPorNome - retorna uma lista
-    public List<Funcionario> listarFuncionariosPorNome(String nome) {
+    //Metodo listaCategoriaPorNome - retorna uma lista
+    public List<Categoria> listarCategoriaPorNome(String nome) {
         try {
 
             //1 passo criar a lista
-            List<Funcionario> lista = new ArrayList<>();
+            List<Categoria> lista = new ArrayList<>();
 
             //2 passo - criar o sql , organizar e executar.
-            String sql = "select * from tb_funcionarios where nome like ?";
+            String sql = "select * from tb_categoria where nome like ?";
             PreparedStatement stmt = con.prepareStatement(sql);
             stmt.setString(1, nome);
 
             ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {
-                Funcionario obj = new Funcionario();
+                Categoria obj = new Categoria();
 
                 obj.setId(rs.getInt("id"));
-                obj.setNome(rs.getString("nome"));
-                obj.setRg(rs.getString("rg"));
-                obj.setCpf(rs.getString("cpf"));
-                obj.setEmail(rs.getString("email"));
-
-                obj.setSenha(rs.getString("senha"));
-                obj.setCargo(rs.getString("cargo"));
-                obj.setNivel_acesso(rs.getString("nivel_acesso"));
-
-                obj.setTelefone(rs.getString("telefone"));
-                obj.setCelular(rs.getString("celular"));
-                obj.setCep(rs.getString("cep"));
-                obj.setEndereco(rs.getString("endereco"));
-                obj.setNumero(rs.getInt("numero"));
-                obj.setComplemento(rs.getString("complemento"));
-                obj.setBairro(rs.getString("bairro"));
-                obj.setCidade(rs.getString("cidade"));
-                obj.setUf(rs.getString("estado"));
+                obj.setDescricao(rs.getString("descricao"));
 
                 lista.add(obj);
             }
@@ -254,60 +215,4 @@ public class DaoCategoria {
             return null;
         }
     }
-
-    //Metodo efetuaLogin
-    public void efetuaLogin(String email, String senha) {
-        try {
-
-            //1 passo - SQL
-            String sql = "select * from tb_funcionarios where email = ? and senha = ?";
-            PreparedStatement stmt = con.prepareStatement(sql);
-            stmt.setString(1, email);
-            stmt.setString(2, senha);
-
-            ResultSet rs = stmt.executeQuery();
-
-            if (rs.next()) {
-                //Usuario logou
-
-                //Caso o usuario seja do tipo admin
-                if (rs.getString("nivel_acesso").equals("Administrador")) {
-
-                    JOptionPane.showMessageDialog(null, "Seja bem vindo ao Sistema");
-                    FrmMenu tela = new FrmMenu();
-                    tela.setUsuarioLogado(rs.getString("nome"));
-
-                    tela.setVisible(true);
-                } //Caso o usuario seja do tipo limitado 
-                else if (rs.getString("nivel_acesso").equals("Usuário")) {
-
-                    JOptionPane.showMessageDialog(null, "Seja bem vindo ao Sistema");
-                    FrmMenu tela = new FrmMenu();
-                    tela.setUsuarioLogado(rs.getString("nome"));
-
-                    //Desabilitar os menus
-                    tela.menu_posicao.setEnabled(false);
-                    tela.menu_controlevendas.setVisible(false);
-
-                    tela.setVisible(true);
-
-                }
-
-            } else {
-                //Dados incorretos
-                JOptionPane.showMessageDialog(null, "Dados incorretos!");
-                new FrmLogin().setVisible(true);
-
-            }
-
-        } catch (SQLException erro) {
-            JOptionPane.showMessageDialog(null, "Erro : " + erro);
-        }
-
-    }
-
-}
-
-    
-    
 }

@@ -346,7 +346,7 @@ public class FrmCategorias extends javax.swing.JFrame {
         String nome = "%" + txtpesquisa.getText() + "%";
 
         DaoCategoria dao = new DaoCategoria();
-        List<Categoria> lista = dao.listarCategoriasPorNome(nome);
+        List<Categoria> lista = dao.listarCategoriaPorNome(nome);
 
         DefaultTableModel dados = (DefaultTableModel) tabelaCategorias.getModel();
         dados.setNumRows(0);
@@ -366,7 +366,7 @@ public class FrmCategorias extends javax.swing.JFrame {
         String nome = "%" + txtpesquisa.getText() + "%";
 
         DaoCategoria dao = new DaoCategoria();
-        List<Categoria> lista = dao.listarCategoriasPorNome(nome);
+        List<Categoria> lista = dao.listarCategoriaPorNome(nome);
 
         DefaultTableModel dados = (DefaultTableModel) tabelaCategorias.getModel();
         dados.setNumRows(0);
