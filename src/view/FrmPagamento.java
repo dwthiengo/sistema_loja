@@ -8,6 +8,7 @@ package view;
 import dao.DaoItemVenda;
 import dao.DaoProduto;
 import dao.DaoVenda;
+import java.text.DecimalFormat;
 import model.Cliente;
 import model.ItemVenda;
 import model.Produto;
@@ -107,6 +108,11 @@ public class FrmPagamento extends javax.swing.JFrame {
 
         txttroco.setEditable(false);
         txttroco.setFont(new java.awt.Font("Tahoma", 0, 26)); // NOI18N
+        txttroco.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txttrocoActionPerformed(evt);
+            }
+        });
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 26)); // NOI18N
         jLabel6.setText("TOTAL:");
@@ -221,7 +227,7 @@ public class FrmPagamento extends javax.swing.JFrame {
 
         troco = totalpago - totalvenda;
 
-        txttroco.setText(String.valueOf(troco));
+        txttroco.setText(String.valueOf(( new DecimalFormat("#,##0.00").format(troco) )));
 
         Venda objv = new Venda();
 
@@ -279,6 +285,10 @@ public class FrmPagamento extends javax.swing.JFrame {
 
 
     }//GEN-LAST:event_btnfinalizarActionPerformed
+
+    private void txttrocoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txttrocoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txttrocoActionPerformed
 
     /**
      * @param args the command line arguments

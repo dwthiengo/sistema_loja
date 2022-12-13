@@ -50,7 +50,7 @@ public class DaoProduto {
     }
     
      public void inserir(Produto produto){
-        String sql= "insert into produto(codigo, descricao, preco, qtd_estoque, fornecedor, categoria) value (?,?,?,?,?,?,?)";
+        String sql= "insert into produto(id, descricao, preco, qtd_estoque, fornecedor, categoria) value (?,?,?,?,?,?,?)";
         
         try {
             PreparedStatement stmt = con.prepareStatement(sql);

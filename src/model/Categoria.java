@@ -5,17 +5,18 @@ import java.util.Objects;
 
 public class Categoria {
     
-    private int codigo;
+    private int id;
     private String descricao;
 
-    public int getCodigo() {
-        return codigo;
+    public int getId() {
+        return id;
     }
 
-    public void setCodigo(int codigo) {
-        this.codigo = codigo;
+    public void setId(int id) {
+        this.id = id;
     }
 
+   
     public String getDescricao() {
         return descricao;
     }
@@ -27,7 +28,7 @@ public class Categoria {
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 37 * hash + this.codigo;
+        hash = 37 * hash + this.id;
         hash = 37 * hash + Objects.hashCode(this.descricao);
         return hash;
     }
@@ -44,7 +45,7 @@ public class Categoria {
             return false;
         }
         final Categoria other = (Categoria) obj;
-        if (this.codigo != other.codigo) {
+        if (this.id != other.id) {
             return false;
         }
         if (!Objects.equals(this.descricao, other.descricao)) {
