@@ -1,12 +1,14 @@
 package view;
 
 import dao.DaoCategoria;
+import dao.DaoCliente;
 
 import java.awt.Color;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import model.Categoria;
+import model.Cliente;
 import model.Utilitarios;
 
 
@@ -67,6 +69,11 @@ public class FrmCategorias extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowActivated(java.awt.event.WindowEvent evt) {
+                formWindowActivated(evt);
+            }
+        });
 
         jButton4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/excluir.png"))); // NOI18N
@@ -300,7 +307,15 @@ public class FrmCategorias extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-         
+        //botao excluir 
+        Categoria obj = new Categoria();
+
+        obj.setId(Integer.parseInt(txtcodigo.getText()));
+
+        DaoCategoria dao = new DaoCategoria();
+
+        dao.excluirCategoria(obj);
+        new Utilitarios().LimpaTela(painel_dados);
 
     }//GEN-LAST:event_jButton4ActionPerformed
 
@@ -363,10 +378,10 @@ public class FrmCategorias extends javax.swing.JFrame {
 
     private void btnpesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnpesquisarActionPerformed
         // Botao pesquisar
-        String nome = "%" + txtpesquisa.getText() + "%";
+        String descricao = "%" + txtpesquisa.getText() + "%";
 
         DaoCategoria dao = new DaoCategoria();
-        List<Categoria> lista = dao.listarCategoriaPorNome(nome);
+        List<Categoria> lista = dao.listarCategoriaPorNome(descricao);
 
         DefaultTableModel dados = (DefaultTableModel) tabelaCategorias.getModel();
         dados.setNumRows(0);
@@ -413,6 +428,14 @@ public class FrmCategorias extends javax.swing.JFrame {
         new Utilitarios().LimpaTela(painel_dados);
 
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+        listar();
+    }//GEN-LAST:event_formWindowActivated
+
+    
+    
+                                  
 
     /**
      * @param args the command line arguments

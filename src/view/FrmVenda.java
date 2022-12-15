@@ -665,13 +665,34 @@ public class FrmVenda extends javax.swing.JFrame {
     }//GEN-LAST:event_btnaddActionPerformed
 
     private void btnbuscaclienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnbuscaclienteActionPerformed
+         // botao buscar cliente por nome     
 
+        String cpf = txtcpf.getText();
+        Cliente obj = new Cliente();
+        DaoCliente dao = new DaoCliente();
 
+        obj = dao.buscaporcpf(cpf);
+
+        if (obj.getCpf() != null) {
+
+            //Exibi os dados do obj nos campos de texto
+            
+            txtnome.setText(obj.getNome());
+            
+            
+        } else {
+            JOptionPane.showMessageDialog(null, "Cliente não encontrado!");
+        }
+
+        
+        
+        
+        /*
         DaoCliente dao = new DaoCliente();
 
         obj = dao.buscaporcpf(txtcpf.getText());
 
-        txtnome.setText(obj.getNome());
+        txtnome.setText(obj.getNome());*/
     }//GEN-LAST:event_btnbuscaclienteActionPerformed
 
     private void btnbuscaprodutonomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnbuscaprodutonomeActionPerformed

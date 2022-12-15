@@ -16,17 +16,11 @@ import jdbc.ConnectionFactory;
 import model.Cliente;
 import model.WebServiceCep;
 
-/**
- *
- * @author Tampelini
- */
 public class DaoCliente {
 
     private Connection con;
 
-    /**
-     *
-     */
+    
     public DaoCliente() {
         //ConnectionFactory obj = new ConnectionFactory();
         //this.con = obj.getConnection();
@@ -35,10 +29,7 @@ public class DaoCliente {
 
     //Metodo cadastrarCliente
 
-    /**
-     *
-     * @param obj
-     */
+    
     public void cadastrarCliente(Cliente obj) {
         try {
 
@@ -76,10 +67,7 @@ public class DaoCliente {
 
     //Metodo AlterarCliente
 
-    /**
-     *
-     * @param obj
-     */
+    
     public void alterarCliente(Cliente obj) {
         try {
 
@@ -118,10 +106,7 @@ public class DaoCliente {
 
     //Metodo ExcluirCliente
 
-    /**
-     *
-     * @param obj
-     */
+    
     public void excluirCliente(Cliente obj) {
         try {
 
@@ -147,10 +132,6 @@ public class DaoCliente {
 
     //Metodo Listar Todos Cliente
 
-    /**
-     *
-     * @return
-     */
     public List<Cliente> listarClientes() {
         try {
 
@@ -195,11 +176,6 @@ public class DaoCliente {
 
     //metodo consultaCliente por Nome
 
-    /**
-     *
-     * @param nome
-     * @return
-     */
     public Cliente consultaPorNome(String nome) {
         try {
             //1 passo - criar o sql , organizar e executar.
@@ -239,11 +215,6 @@ public class DaoCliente {
     
     //metodo busca Cliente  por Cpf
 
-    /**
-     *
-     * @param cpf
-     * @return
-     */
     public Cliente buscaporcpf(String cpf) {
         try {
             //1 passo - criar o sql , organizar e executar.

@@ -5,11 +5,11 @@
  */
 package view;
 
-import dao.DaoCliente;
+
 import dao.DaoFornecedor;
 import dao.DaoProduto;
 import dao.DaoCategoria;
-import model.Cliente;
+
 import model.Fornecedor;
 import model.Produto;
 import model.Utilitarios;

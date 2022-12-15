@@ -88,7 +88,7 @@ public class DaoCategoria {
             stmt.setString(2, obj.getDescricao());
             
 
-            stmt.setInt(17, obj.getId());
+            
 
             //3 passo - executar o comando sql
             stmt.execute();
@@ -185,16 +185,16 @@ public class DaoCategoria {
     }
 
     //Metodo listaCategoriaPorNome - retorna uma lista
-    public List<Categoria> listarCategoriaPorNome(String nome) {
+    public List<Categoria> listarCategoriaPorNome(String descricao) {
         try {
 
             //1 passo criar a lista
             List<Categoria> lista = new ArrayList<>();
 
             //2 passo - criar o sql , organizar e executar.
-            String sql = "select * from tb_categoria where nome like ?";
+            String sql = "select * from tb_categoria where descricao like ?";
             PreparedStatement stmt = con.prepareStatement(sql);
-            stmt.setString(1, nome);
+            stmt.setString(1, descricao);
 
             ResultSet rs = stmt.executeQuery();
 

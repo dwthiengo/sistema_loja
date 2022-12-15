@@ -15,7 +15,7 @@ public class ConnectionFactory {
     private final String port = "3306";
     private final String user = "usuario";
     private final String pass = "123";
-    private final String bd = "bdvendas";
+    private final String bd = "sistema_loja";
 
     public Connection getConnection() {
 
