@@ -80,12 +80,13 @@ public class DaoCategoria {
         try {
 
             //1 passo  - criar o comando sql
-            String sql = "update tb_categoria  set descricao=?,   where id =?";
+            String sql = "update tb_categoria  set descricao=?  where id =?";
 
             //2 passo - conectar o banco de dados e organizar o comando sql
             PreparedStatement stmt = con.prepareStatement(sql);
-            stmt.setInt(1, obj.getId());
-            stmt.setString(2, obj.getDescricao());
+            stmt.setString(1, obj.getDescricao());
+            stmt.setInt(2, obj.getId());
+            
             
 
             

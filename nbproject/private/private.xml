@@ -3,7 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/eduar/Documents/NetBeansProjects/sistema_loja/sistema_loja/src/view/FrmCategorias.java</file>
+            <file>file:/C:/Users/eduar/Documents/NetBeansProjects/sistema_loja/sistema_loja/src/view/FrmPagamento.java</file>
+            <file>file:/C:/Users/eduar/Documents/NetBeansProjects/sistema_loja/sistema_loja/src/dao/DaoCliente.java</file>
+            <file>file:/C:/Users/eduar/Documents/NetBeansProjects/sistema_loja/sistema_loja/src/view/FrmVenda.java</file>
+            <file>file:/C:/Users/eduar/Documents/NetBeansProjects/sistema_loja/sistema_loja/src/dao/DaoVenda.java</file>
         </group>
     </open-files>
 </project-private>

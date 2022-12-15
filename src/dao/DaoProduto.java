@@ -39,7 +39,7 @@ public class DaoProduto {
             stmt.execute();
             stmt.close();
 
-            JOptionPane.showMessageDialog(null, "Produto Cadastrado com Sucesso!");
+            
 
         } catch (Exception erro) {
 
@@ -82,14 +82,17 @@ public class DaoProduto {
             stmt.setInt(3, obj.getQtd_estoque());
 
             stmt.setInt(4, obj.getFornecedor().getId());
-           
+            
+            stmt.setInt(5, obj.getCategoria().getId());
+            
+            stmt.setInt(6, obj.getId());
 
-            stmt.setInt(5, obj.getId());
+            
 
             stmt.execute();
             stmt.close();
 
-            JOptionPane.showMessageDialog(null, "Produto Alterardo com Sucesso!");
+            JOptionPane.showMessageDialog(null, "Produto Alterado com Sucesso!");
 
         } catch (Exception erro) {
 
@@ -173,8 +176,8 @@ public class DaoProduto {
 
             //2 passo - criar o sql , organizar e executar.
             String sql = "select p.id, p.descricao, p.preco, p.qtd_estoque, f.nome, c.descricao  from tb_produtos as p "
-                    + "inner join tb_fornecedores as f on (p.for_id = f.id) where p.descricao like ?"
-                    + "inner join tb_categoria as c on (p.cat_id = c.id)";
+                    + "inner join tb_fornecedores as f on (p.for_id = f.id) "
+                    + "inner join tb_categoria as c on (p.cat_id = c.id) where p.descricao like ?";
 
             PreparedStatement stmt = con.prepareStatement(sql);
             stmt.setString(1, nome);
