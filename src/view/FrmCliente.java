@@ -5,6 +5,7 @@
  */
 package view;
 
+import dao.DaoCPF;
 import dao.DaoCliente;
 import java.awt.Color;
 import java.awt.event.KeyEvent;
@@ -98,6 +99,7 @@ public class FrmCliente extends javax.swing.JFrame {
         jLabel14 = new javax.swing.JLabel();
         cbuf = new javax.swing.JComboBox<>();
         jLabel15 = new javax.swing.JLabel();
+        BtnValidar = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabelaClientes = new javax.swing.JTable();
@@ -149,11 +151,16 @@ public class FrmCliente extends javax.swing.JFrame {
         jLabel3.setText("Nome:");
 
         try {
-            txtcpf.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###-##")));
+            txtcpf.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###########")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
         txtcpf.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtcpf.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtcpfActionPerformed(evt);
+            }
+        });
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel4.setText("E-mail:");
@@ -265,6 +272,13 @@ public class FrmCliente extends javax.swing.JFrame {
         jLabel15.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel15.setText("Cidade:");
 
+        BtnValidar.setText("Validar");
+        BtnValidar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnValidarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout painel_dadosLayout = new javax.swing.GroupLayout(painel_dados);
         painel_dados.setLayout(painel_dadosLayout);
         painel_dadosLayout.setHorizontalGroup(
@@ -350,7 +364,9 @@ public class FrmCliente extends javax.swing.JFrame {
                                 .addGap(38, 38, 38)
                                 .addComponent(jLabel5)
                                 .addGap(10, 10, 10)
-                                .addComponent(txtcpf, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(txtcpf, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(BtnValidar)))
                         .addGap(100, 100, 100))))
         );
 
@@ -423,11 +439,13 @@ public class FrmCliente extends javax.swing.JFrame {
                     .addGroup(painel_dadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(txtrg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel6))
-                    .addComponent(txtcpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(painel_dadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(txtcpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(BtnValidar))
                     .addGroup(painel_dadosLayout.createSequentialGroup()
                         .addGap(5, 5, 5)
                         .addComponent(jLabel5)))
-                .addContainerGap(134, Short.MAX_VALUE))
+                .addContainerGap(135, Short.MAX_VALUE))
         );
 
         painel_dadosLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {txtemail, txtnome});
@@ -499,7 +517,7 @@ public class FrmCliente extends javax.swing.JFrame {
                         .addComponent(txtpesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(btnpesquisar)))
                 .addGap(32, 32, 32)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 243, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 245, Short.MAX_VALUE)
                 .addGap(35, 35, 35))
         );
 
@@ -672,6 +690,7 @@ public class FrmCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_txtnomeActionPerformed
 
     private void btnsalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsalvarActionPerformed
+        
         // boto salvar
 
         Cliente obj = new Cliente();
@@ -689,6 +708,7 @@ public class FrmCliente extends javax.swing.JFrame {
         obj.setBairro(txtbairro.getText());
         obj.setCidade(txtcidade.getText());
         obj.setUf(cbuf.getSelectedItem().toString());
+        
 
         DaoCliente dao = new DaoCliente();
 
@@ -805,6 +825,20 @@ public class FrmCliente extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnnovoActionPerformed
 
+    private void BtnValidarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnValidarActionPerformed
+        String cpf = txtcpf.getText();
+         DaoCPF dao = new DaoCPF(cpf);
+        if(dao.isCPF(cpf)){
+            JOptionPane.showMessageDialog(rootPane,"CPF válido!");
+        }else{
+            JOptionPane.showMessageDialog(rootPane,"CPF inválido!");
+        }
+    }//GEN-LAST:event_BtnValidarActionPerformed
+
+    private void txtcpfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtcpfActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtcpfActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -845,6 +879,7 @@ public class FrmCliente extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BtnValidar;
     private javax.swing.JTabbedPane aba_dados;
     private javax.swing.JButton btnbusca;
     private javax.swing.JButton btnnovo;
@@ -889,4 +924,6 @@ public class FrmCliente extends javax.swing.JFrame {
     private javax.swing.JTextField txtpesquisa;
     private javax.swing.JFormattedTextField txtrg;
     // End of variables declaration//GEN-END:variables
+
+
 }
